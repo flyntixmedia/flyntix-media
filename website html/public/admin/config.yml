@@ -1,0 +1,55 @@
+backend:
+  name: github
+  repo: flyntixmedia/flyntix-media
+  branch: main
+  base_url: https://flyntixmedia.com
+  auth_endpoint: api/auth
+
+publish_mode: simple
+media_folder: "public/images/blog"
+public_folder: "/images/blog"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    label_singular: "Blog Post"
+    folder: "src/content/blog"
+    create: true
+    delete: true
+    slug: "{{slug}}"
+    identifier_field: title
+    summary: "{{title}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Meta Description", name: "description", widget: "text", hint: "Shown in Google search results and on card previews. Keep it under ~160 characters." }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime", format: "YYYY-MM-DD" }
+      - { label: "Tags", name: "tags", widget: "list", default: ["AI Writing"] }
+      - label: "Card Label"
+        name: "cardTag"
+        widget: "select"
+        options: ["Review", "Guide", "Comparison", "Tutorial", "News"]
+        default: "Review"
+      - label: "Affiliate Disclosure"
+        name: "disclosure"
+        widget: "text"
+        default: "Flyntix Media may earn a commission if you sign up for a tool through links in this article, at no extra cost to you. We only recommend tools we've personally tested and believe in."
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "CTA Button Text", name: "ctaText", widget: "string", required: false, default: "Try It Free →", hint: "Leave blank to hide the CTA box entirely." }
+      - { label: "Affiliate CTA Link", name: "ctaLink", widget: "string", required: false }
+      - { label: "CTA Note", name: "ctaNote", widget: "string", required: false, default: "Affiliate link — we may earn a commission at no extra cost to you." }
+      - label: "FAQ"
+        name: "faq"
+        widget: "list"
+        required: false
+        fields:
+          - { label: "Question", name: "question", widget: "string" }
+          - { label: "Answer", name: "answer", widget: "text" }
+      - label: "Related Post"
+        name: "relatedSlug"
+        widget: "relation"
+        collection: "blog"
+        search_fields: ["title"]
+        value_field: "{{slug}}"
+        display_fields: ["title"]
+        required: false
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }

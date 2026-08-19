@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Flyntix Media publishes honest software reviews, AI tool comparisons, and tutorials to help you make smarter tech decisions — without the fluff.',
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <slot name="head" />
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 32 32" fill="none">
+      <polygon points="20,2 12,16 17,16 11,30 24,14 18,14 22,2" fill="#3B82F6"/>
+    </svg>
+    <span class="nav-wordmark">FLYNTIX <span>MEDIA</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="/#topics">Topics</a></li>
+    <li><a href="/blog">Reviews</a></li>
+    <li><a href="/#platforms">Platforms</a></li>
+    <li><a href="/#newsletter" class="nav-cta">Subscribe</a></li>
+  </ul>
+</nav>
+
+<slot />
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" class="footer-logo">
+      <svg width="24" height="24" viewBox="0 0 32 32" fill="none">
+        <polygon points="20,2 12,16 17,16 11,30 24,14 18,14 22,2" fill="#3B82F6"/>
+      </svg>
+      <span class="footer-wordmark">FLYNTIX <span>MEDIA</span></span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="/blog">Reviews</a></li>
+      <li><a href="/#topics">Tutorials</a></li>
+      <li><a href="/#newsletter">Newsletter</a></li>
+      <li><a href="/blog">Affiliate disclosure</a></li>
+    </ul>
+    <div class="footer-copy">© 2026 Flyntix Media. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>

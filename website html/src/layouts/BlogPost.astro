@@ -1,0 +1,78 @@
+---
+import Layout from './Layout.astro';
+import { getEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  description: string;
+  cardTag: string;
+  pubDate: Date;
+  disclosure: string;
+  faq: { question: string; answer: string }[];
+  ctaText?: string;
+  ctaLink?: string;
+  ctaNote: string;
+  relatedSlug?: string;
+  relatedLabel?: string;
+}
+
+const {
+  title,
+  description,
+  cardTag,
+  pubDate,
+  disclosure,
+  faq,
+  ctaText,
+  ctaLink,
+  ctaNote,
+  relatedSlug,
+  relatedLabel,
+} = Astro.props;
+
+const relatedPost = relatedSlug ? await getEntry('blog', relatedSlug) : undefined;
+---
+
+<Layout title={`${title} — Flyntix Media`} description={description}>
+  <div class="article-header">
+    <div class="breadcrumb"><a href="/blog">Reviews</a> / {title}</div>
+    <div class="card-tag">{cardTag}</div>
+    <h1>{title}</h1>
+    <div class="article-meta">
+      Flyntix Media · Updated {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+    </div>
+  </div>
+
+  <div class="disclosure">
+    <strong>Affiliate Disclosure:</strong> {disclosure}
+  </div>
+
+  <article>
+    <slot />
+
+    {faq.length > 0 && (
+      <>
+        <h2>FAQ</h2>
+        {faq.map((item) => (
+          <div class="faq-item">
+            <h3>{item.question}</h3>
+            <p>{item.answer}</p>
+          </div>
+        ))}
+      </>
+    )}
+
+    {ctaText && ctaLink && (
+      <div class="cta-box">
+        <a href={ctaLink} class="btn-primary" rel="sponsored noopener" target="_blank">{ctaText}</a>
+        <div class="cta-note">{ctaNote}</div>
+      </div>
+    )}
+
+    {relatedPost && (
+      <div class="related">
+        Read more: <a href={`/blog/${relatedPost.slug}`}>{relatedLabel || relatedPost.data.title}</a>
+      </div>
+    )}
+  </article>
+</Layout>

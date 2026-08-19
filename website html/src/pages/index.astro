@@ -1,0 +1,487 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const thumbVariant = (i: number) => `card-thumb-${(i % 3) + 1}`;
+---
+
+<Layout title="Flyntix Media — Tech, Software & AI Reviews">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      AI & Software Reviews — Multi-Platform
+    </div>
+    <h1>Cut through the<br><em>AI noise.</em></h1>
+    <p class="hero-sub">Flyntix Media publishes honest software reviews, AI tool comparisons, and tutorials to help you make smarter tech decisions — without the fluff.</p>
+    <div class="hero-actions">
+      <a href="/blog" class="btn-primary">Browse reviews</a>
+      <a href="#newsletter" class="btn-ghost">Get the newsletter</a>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">50<span>+</span></div>
+      <div class="stat-label">Tools reviewed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Platforms</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100<span>%</span></div>
+      <div class="stat-label">Independent coverage</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Paid placements</div>
+    </div>
+  </div>
+
+  <!-- TOPICS -->
+  <section id="topics">
+    <div class="container">
+      <div class="section-eyebrow">What we cover</div>
+      <div class="section-title">Everything in the<br>AI & software stack</div>
+      <p class="section-desc">From writing assistants to video generators, we test the tools professionals and creators actually use.</p>
+
+      <div class="topics-grid">
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3>AI writing tools</h3>
+          <p>In-depth reviews of Jasper, Writesonic, Copy.ai, and every major AI writing platform — benchmarked against real tasks.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Software & SaaS</h3>
+          <p>Honest comparisons of productivity tools, automation platforms, and SaaS products — including pricing breakdowns.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+          </div>
+          <h3>AI video & audio</h3>
+          <p>Synthesia, Pictory, Murf, ElevenLabs, and more — tested for quality, speed, and value across content creation workflows.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <h3>Hosting & web tools</h3>
+          <p>VPNs, web hosting providers, domain registrars, and security tools — reviewed for performance and reliability.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h3>Tutorials & how-tos</h3>
+          <p>Step-by-step guides that show you how to get the most from AI tools — for beginners and power users alike.</p>
+        </div>
+        <div class="topic-card">
+          <div class="topic-icon">
+            <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          </div>
+          <h3>Deals & pricing</h3>
+          <p>Current pricing breakdowns, lifetime deals, and affiliate discounts — so you never overpay for software again.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <div class="container">
+      <div class="section-eyebrow">Latest coverage</div>
+      <div class="section-title">Fresh from Flyntix</div>
+      <p class="section-desc">Our most recent reviews, comparisons, and guides — published across YouTube, blog, and social.</p>
+
+      <div class="content-grid">
+        {posts.map((post, i) => (
+          <a href={`/blog/${post.slug}`} class="content-card">
+            <div class={`card-thumb ${thumbVariant(i)}`}>
+              <span class="thumb-label">{post.data.tags[0] ?? post.data.cardTag}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-tag">{post.data.cardTag}</div>
+              <div class="card-title">{post.data.title}</div>
+              <div class="card-excerpt">{post.data.description}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PLATFORMS -->
+  <section id="platforms" class="platforms-section">
+    <div class="container">
+      <div class="section-eyebrow">Where to find us</div>
+      <div class="section-title">One brand,<br>every platform</div>
+      <p class="section-desc">Flyntix Media publishes across YouTube, TikTok, Instagram, and our blog — same honest coverage, your preferred format.</p>
+
+      <div class="platforms-grid">
+        <div class="platform-card">
+          <div class="platform-dot"></div>
+          <div class="platform-name">YouTube</div>
+          <div class="platform-type">Long-form reviews & tutorials</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-dot"></div>
+          <div class="platform-name">TikTok</div>
+          <div class="platform-type">Quick takes & tool spotlights</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-dot"></div>
+          <div class="platform-name">Instagram</div>
+          <div class="platform-type">Reels, carousels & tips</div>
+        </div>
+        <div class="platform-card">
+          <div class="platform-dot"></div>
+          <div class="platform-name">Blog</div>
+          <div class="platform-type">In-depth articles & guides</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="container">
+      <div class="newsletter">
+        <h2>Stay ahead of the AI curve</h2>
+        <p>Weekly roundups of the best new tools, honest reviews, and deals — straight to your inbox. No spam, unsubscribe anytime.</p>
+        <div class="email-form">
+          <input type="email" class="email-input" placeholder="your@email.com" />
+          <button class="email-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(59,130,246,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(59,130,246,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 20%, transparent 80%);
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue-glow);
+    border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--blue);
+    font-weight: 500;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--blue);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: var(--display);
+    font-size: clamp(40px, 7vw, 80px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--light);
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+    line-height: 1.6;
+    position: relative;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* STATS */
+  .stats {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin-top: 80px;
+    position: relative;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  .stat {
+    flex: 1;
+    max-width: 220px;
+    padding: 36px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-num span { color: var(--blue); }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* TOPICS */
+  .topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 60px;
+  }
+
+  .topic-card {
+    background: var(--surface);
+    padding: 36px 32px;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .topic-card:hover { background: var(--surface2); }
+
+  .topic-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--blue-glow);
+    border: 1px solid rgba(59,130,246,0.25);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .topic-icon svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 1.8; }
+
+  .topic-card h3 {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .topic-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .content-grid { margin-top: 60px; }
+
+  /* PLATFORMS */
+  .platforms-section { background: var(--surface); }
+
+  .platforms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 60px;
+  }
+
+  .platform-card {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .platform-card:hover { border-color: rgba(59,130,246,0.3); }
+
+  .platform-name {
+    font-family: var(--display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .platform-type {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .platform-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--blue);
+    border-radius: 50%;
+    margin: 0 auto 16px;
+  }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 64px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 680px;
+  }
+
+  .newsletter::before {
+    content: '';
+    position: absolute;
+    top: -80px; left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .newsletter h2 {
+    font-family: var(--display);
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .newsletter p {
+    color: var(--light);
+    margin-bottom: 32px;
+    font-size: 16px;
+    position: relative;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 12px;
+    max-width: 420px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .email-input {
+    flex: 1;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 18px;
+    color: var(--text);
+    font-family: var(--body);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-input::placeholder { color: var(--muted); }
+  .email-input:focus { border-color: var(--blue); }
+
+  .email-btn {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+    font-family: var(--body);
+  }
+
+  .email-btn:hover { background: var(--blue-dim); }
+
+  @media (max-width: 768px) {
+    .stats { flex-wrap: wrap; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); min-width: 50%; }
+    .newsletter { padding: 40px 24px; }
+    .email-form { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge-dot { animation: none; }
+  }
+</style>
