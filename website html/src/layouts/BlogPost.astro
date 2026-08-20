@@ -39,7 +39,7 @@ const relatedPost = relatedSlug ? await getEntry('blog', relatedSlug) : undefine
     <div class="card-tag">{cardTag}</div>
     <h1>{title}</h1>
     <div class="article-meta">
-      Flyntix Media · Updated {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}
+      Flyntix Media · Updated {pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', timeZone: 'UTC' })}
     </div>
   </div>
 
