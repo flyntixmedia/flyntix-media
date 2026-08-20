@@ -6,14 +6,14 @@ backend:
   auth_endpoint: api/auth
 
 publish_mode: simple
-media_folder: "public/images/blog"
+media_folder: "website html/public/images/blog"
 public_folder: "/images/blog"
 
 collections:
   - name: "blog"
     label: "Blog Posts"
     label_singular: "Blog Post"
-    folder: "src/content/blog"
+    folder: "website html/src/content/blog"
     create: true
     delete: true
     slug: "{{slug}}"
