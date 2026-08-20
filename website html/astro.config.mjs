@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import vercel from '@astrojs/vercel';
 
 export default defineConfig({
-  site: 'https://flyntixmedia.com',
+  site: 'https://www.flyntixmedia.com',
   output: 'static',
   adapter: vercel(),
 });

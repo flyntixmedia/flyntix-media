@@ -2,7 +2,7 @@ backend:
   name: github
   repo: flyntixmedia/flyntix-media
   branch: main
-  base_url: https://flyntixmedia.com
+  base_url: https://www.flyntixmedia.com
   auth_endpoint: api/auth
 
 publish_mode: simple
