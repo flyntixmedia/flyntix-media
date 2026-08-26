@@ -6,7 +6,7 @@ tags: ["AI Writing", "Review"]
 cardTag: "Review"
 disclosure: "Flyntix Media may earn a commission if you sign up for Jasper through links in this article, at no extra cost to you. We only recommend tools we've personally tested and believe in."
 ctaText: "Try Jasper AI Free for 7 Days →"
-ctaLink: "#"
+ctaLink: "https://www.jasper.ai"
 relatedSlug: "best-ai-writing-tools-2026"
 relatedLabel: "AI writing tools comparison"
 faq:

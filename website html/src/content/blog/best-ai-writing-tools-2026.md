@@ -13,7 +13,7 @@ disclosure: Flyntix Media may earn a commission if you sign up for a tool
   through links in this article, at no extra cost to you. We only recommend
   tools we've researched and believe deliver real value.
 ctaText: Try Jasper AI Free for 7 Days →
-ctaLink: "#"
+ctaLink: "https://www.jasper.ai"
 faq:
   - question: Which AI writing tool is cheapest?
     answer: Rytr, at roughly $7.50–9/month for its Unlimited plan, with a permanent
